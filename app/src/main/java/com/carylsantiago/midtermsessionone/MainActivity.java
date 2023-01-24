@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.Switch;
@@ -17,12 +19,19 @@ import android.widget.RadioGroup;
 import android.widget.CheckBox;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.app.DatePickerDialog;
+import java.util.Calendar;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+
 
 public class MainActivity extends AppCompatActivity {
     private CheckBox burger, pizza, chicken;
-    private Button btnOrder, btnCloseApp, btnGender;
+    private Button btnOrder, btnCloseApp, btnGender, btnDate;
     private RadioButton rMale, rFemale, rGender;
     private RadioGroup radioGroup;
+    private TextView tDate;
+    private Spinner spin;
     AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,46 @@ public class MainActivity extends AppCompatActivity {
         btnGender = (Button) findViewById(R.id.gender);
         radioGroup = (RadioGroup) findViewById(R.id.rdGroup);
         builder = new AlertDialog.Builder(this);
+        btnDate = (Button) findViewById(R.id.pickDate);
+        tDate = findViewById(R.id.tvDate);
+
+        final String[] country = {"Please Select a Country", "USA", "Canada", "Japan", "Philippines", "UAE"};
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, country);
+        spin = findViewById(R.id.spinner);
+        spin.setAdapter(stringArrayAdapter);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), country[position] + " selected", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthofyear, int dayofmonth) {
+                                tDate.setText(dayofmonth + " - " + (monthofyear + 1) + " - " + year);
+                            }
+                        },
+               year, month, day );
+                datePickerDialog.show();
+            }
+        });
+
 
         btnGender.setOnClickListener(new View.OnClickListener() {
             @Override

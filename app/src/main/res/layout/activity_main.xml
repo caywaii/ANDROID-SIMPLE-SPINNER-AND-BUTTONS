@@ -73,6 +73,41 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="TextView"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:id="@+id/tvDate">
+
+        </TextView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick Date"
+            android:id="@+id/pickDate"
+           >
+
+        </Button>
+
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/spinner">
+
+        </Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -80,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CLOSE APP"
-            android:layout_marginTop="500dp"
+            android:layout_marginTop="300dp"
             android:layout_marginLeft="275dp"
             android:id="@+id/closeApp">
         </Button>
